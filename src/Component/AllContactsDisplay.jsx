@@ -17,7 +17,7 @@ export default class AllContactsDisplay extends Component {
 
         const listItems = contactslist.map((item, i) => (
             <div className='contacts-details' key={i}>
-                <Link to={{ pathname: '/contactdisplay/' + item.email }} className="contact-cointeiner" onClick={() => this.handleChange(item.email)}>
+                <Link to={{ pathname: '/contactdisplay/' + localStorage.key(i) }} className="contact-cointeiner" onClick={() => this.handleChange(localStorage.key(i))}>
                     <h4>{item.name}</h4>
                     <p>{item.email}</p>
                     <p>{item.mobile}</p>

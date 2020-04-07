@@ -24,7 +24,7 @@ export default class ContactDetails extends Component {
             <div className="col-sm-6 display-contact-details">
                 <div className="contact-header">
                     <h4>{user.name}</h4>
-                    <Link to={{pathname:'/edit/'+user.email}} className="contact-edit">
+                    <Link to={{pathname:'/edit/'+(window.location.pathname).split('/contactdisplay/')[1]}} className="contact-edit">
                         <img src={Edit} alt="EDIT" />
                         <p>EDIT</p>
                     </Link>

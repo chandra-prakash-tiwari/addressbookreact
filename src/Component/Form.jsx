@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 export default class Form extends Component {
     constructor(props) {
@@ -12,6 +13,7 @@ export default class Form extends Component {
                 website: '',
                 address: '',
                 opertaion: 'ADD',
+                id:uuidv4(),
             };
         else {
             var user = JSON.parse(localStorage.getItem((window.location.pathname).split('/edit/')[1]))
@@ -24,6 +26,7 @@ export default class Form extends Component {
                 website: user.website,
                 address: user.address,
                 opertaion: 'UPDATE',
+                id:(window.location.pathname).split('/edit/')[1],
             }   
         }
     }
@@ -44,8 +47,7 @@ export default class Form extends Component {
             "website": document.getElementById("form-details")[4].value,
             "address": document.getElementById("form-details")[5].value
         };
-        localStorage.removeItem((window.location.pathname).split('/edit/')[1]);
-        localStorage.setItem(document.getElementById("form-details")[1].value, JSON.stringify(contactdetail));
+        localStorage.setItem(this.state.id, JSON.stringify(contactdetail));
     }
 
     render() {
