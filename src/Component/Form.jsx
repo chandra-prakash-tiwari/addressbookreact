@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 import { v4 as uuidv4 } from 'uuid';
 
 export default class Form extends Component {
@@ -17,7 +18,10 @@ export default class Form extends Component {
             };
         else {
             var user = JSON.parse(localStorage.getItem((window.location.pathname).split('/edit/')[1]))
-
+            if (user == null)
+                return (
+                    window.location.pathname='/'
+                )
             this.state = {
                 name: user.name,
                 email: user.email,
@@ -38,14 +42,14 @@ export default class Form extends Component {
         });
     }
 
-    contact = (event) => {  
+    contact = () => {  
         var contactdetail = {
-            "name": document.getElementById("form-details")[0].value,
-            "email": document.getElementById("form-details")[1].value,
-            "mobile": document.getElementById("form-details")[2].value,
-            "landline": document.getElementById("form-details")[3].value,
-            "website": document.getElementById("form-details")[4].value,
-            "address": document.getElementById("form-details")[5].value
+            "name": this.state.name,
+            "email": this.state.email,
+            "mobile": this.state.mobile,
+            "landline": this.state.landline,
+            "website": this.state.website,
+            "address": this.state.address
         };
         localStorage.setItem(this.state.id, JSON.stringify(contactdetail));
     }
@@ -53,7 +57,7 @@ export default class Form extends Component {
     render() {
         return (
             <div className="col-sm-6 form"  >
-                <form action="#" id="form-details" onSubmit={this.contact}>
+                <form action="/" id="form-details" onSubmit={this.contact} >
                     <div className="form-group">
                         <label><b>Name <span>Required</span></b></label>
                         <input type="text" className="form-control" name="name" value={this.state.name} id="name" onChange={this.handleChange} required />
